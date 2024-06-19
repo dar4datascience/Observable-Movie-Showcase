@@ -16,5 +16,8 @@ movie_data = FileAttachment("movies_metadata.csv")
 
 
 ```{ojs}
-Inputs.table(movie_data)
+Inputs.table(movie_data,{
+rows: 100
+})
 ```
+
