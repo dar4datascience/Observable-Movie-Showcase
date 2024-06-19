@@ -1,0 +1,20 @@
+---
+title: "Movie Showcaser"
+format: 
+  dashboard:
+    theme: zephyr
+---
+
+
+```{ojs}
+//| output: false
+//| 
+movie_data = FileAttachment("movies_metadata.csv")
+  .csv({ typed: true })
+  
+```
+
+
+```{ojs}
+Inputs.table(movie_data)
+```
