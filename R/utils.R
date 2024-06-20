@@ -9,6 +9,7 @@ tbl_movies_found <- function(movies_found) {
       onClick = "select",
       striped = TRUE,
       pagination = FALSE,
+      searchable = TRUE,
       defaultColDef = colDef(align = 'center'),
       columns = list(
         poster = colDef(
