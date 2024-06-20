@@ -2,24 +2,28 @@
 #' @export
 tbl_movies_found <- function(movies_found) {
   movies_found |>
+    dplyr::select(title, year, plot, poster) |>
     reactable(
       theme = fivethirtyeight(centered = TRUE),
       selection = "single",
       onClick = "select",
       striped = TRUE,
+      pagination = FALSE,
       defaultColDef = colDef(align = 'center'),
       columns = list(
-        team_logo_espn = colDef(show = FALSE),
-        title = colDef(maxWidth = 200, name = 'Movie'),
-        year = colDef(name = 'Released'),
         poster = colDef(
           name = 'Poster',
-          minWidth = 150,
+          maxWidth = 200,
           cell = embed_img(movies_found$poster,
-                           height = 100,
-                           width = 135,
+                           height = 200,
+                           width = 235,
                            horizontal_align = 'center')
-        )
+        ),
+        title = colDef(maxWidth = 150, name = 'Movie'),
+        year = colDef(maxWidth = 50,
+                      name = 'Released'),
+        plot = colDef(minWidth = 150,
+                      name = 'Plot')
       )
     )
 }

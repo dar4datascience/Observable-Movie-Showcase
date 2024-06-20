@@ -5,19 +5,11 @@ format:
     theme: zephyr
 ---
 
+## Reactable
 
-```{ojs}
-//| output: false
-//| 
-movie_data = FileAttachment("movies_metadata.csv")
-  .csv({ typed: true })
-  
-```
-
-
-```{ojs}
-Inputs.table(movie_data,{
-rows: 100
-})
+```{r}
+library(reactablefmtr)
+source('R/utils.R')
+tbl_movies_found(readr::read_csv('movies_metadata.csv'))
 ```
 

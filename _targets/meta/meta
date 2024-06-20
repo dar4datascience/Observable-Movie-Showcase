@@ -11,3 +11,12 @@ search_movie_data|function|dd54df39323bef41|||||||||||||||
 showcase_movies|stem|117cd45ee456a197|380c9e39d3fe6cbf|b7d0443559e185a9|-686267817||t19893.8924746015s|429900d4c1d04384|1616|rds|local|vector|||1.725||
 showcase_path|object|8b52d2a611e7c6b6|||||||||||||||
 tbl_movies_found|function|0befdfa1aeb6da7f|||||||||||||||
+fetch_key_movie_attributes|function|2a04ad9b0dcb7abc
+search_movie_data|function|dd54df39323bef41
+query_movie_data|function|6dd096c16e3ab2ed
+showcase_path|object|8b52d2a611e7c6b6
+.Random.seed|object|ca928b2458d62322
+tbl_movies_found|function|bbe23d89540ea183
+query_movies_2_showcase|function|b6dae759fd68ce41
+omdb_api|object|1015a6deb706ffdd
+search_all_movies_metadata|function|b48f32995dba9ba0
