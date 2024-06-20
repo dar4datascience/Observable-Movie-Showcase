@@ -19,9 +19,9 @@ jobs:
         with:
           r-version: '4.4.0'
 
-        # install libxml2-dev dependency
-      - name: Install libxml2-dev
-        run: sudo apt-get install libxml2-dev
+        # install libxml2-dev and libglpk-dev for xml2 and lpSolve
+      - name: Install dependencies
+        run: sudo apt-get install libxml2-dev libglpk-dev
 
       - name: Restore Packages
         uses: r-lib/actions/setup-renv@v2
