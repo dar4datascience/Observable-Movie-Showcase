@@ -19,12 +19,12 @@ jobs:
         with:
           r-version: '4.4.0'
 
-      - name: Restore Packages
-        uses: r-lib/actions/setup-renv@v2
-
         # install libxml2-dev dependency
       - name: Install libxml2-dev
         run: sudo apt-get install libxml2-dev
+
+      - name: Restore Packages
+        uses: r-lib/actions/setup-renv@v2
 
       - name: "Setup R dependencies for Quarto's knitr engine"
         uses: r-lib/actions/setup-r-dependencies@v2
