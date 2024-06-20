@@ -60,6 +60,8 @@ tar_source()
 # step 2: reactable to show case the movies with embed movies
 # step 3: deploy to github pages
 showcase_path <- "/run/user/1000/gvfs/smb-share:server=desktop-eknjrcs,share=bigelements/Rafa Processed"
+
+
 omdb_api <- Sys.getenv("OMDb_key")
 
 # Replace the target list below with your own:
@@ -74,7 +76,7 @@ list(
   ),
   # save 2 csv information
   tar_target(
-    name = save_movies_metadata,
+    name = save_movies,
     command = save_movies_metadata(movies_metadata)
   )
 )
