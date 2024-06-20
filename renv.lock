@@ -165,7 +165,7 @@
       "Package": "cli",
       "Version": "3.6.2",
       "Source": "Repository",
-      "Repository": "P3M",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "utils"
@@ -203,7 +203,7 @@
       "Package": "cpp11",
       "Version": "0.4.7",
       "Source": "Repository",
-      "Repository": "P3M",
+      "Repository": "RSPM",
       "Requirements": [
         "R"
       ],
@@ -447,7 +447,7 @@
       "Package": "igraph",
       "Version": "2.0.3",
       "Source": "Repository",
-      "Repository": "P3M",
+      "Repository": "RSPM",
       "Requirements": [
         "Matrix",
         "R",
@@ -819,7 +819,7 @@
       "Package": "rlang",
       "Version": "1.1.4",
       "Source": "Repository",
-      "Repository": "P3M",
+      "Repository": "RSPM",
       "Requirements": [
         "R",
         "utils"
