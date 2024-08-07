@@ -59,7 +59,7 @@ tar_source()
 # step 1: fs to get list of updated movies to show case
 # step 2: reactable to show case the movies with embed movies
 # step 3: deploy to github pages
-showcase_path <- "/run/user/1000/gvfs/smb-share:server=desktop-eknjrcs,share=bigelements/Rafa Processed"
+showcase_path <- "/run/user/1000/gvfs/smb-share:server=desktop-eknjrcs,share=bigelements/Rafa Processed/Segunda Tanda"
 
 
 omdb_api <- Sys.getenv("OMDb_key")
