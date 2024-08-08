@@ -54,4 +54,6 @@ query_movies_2_showcase <- function(path){
 save_movies_metadata <- function(movies_metadata){
   readr::write_csv(movies_metadata, "movies_metadata.csv",
                    append = FALSE)
+
+  return(movies_metadata)
 }

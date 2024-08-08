@@ -9,7 +9,13 @@ format:
 
 ```{r}
 library(reactablefmtr)
-source('R/utils.R')
-tbl_movies_found(readr::read_csv('movies_metadata.csv'))
+
+targets::tar_source()
+
+targets::tar_load(save_movies)
+
+movies_in_catalogue <- targets::tar_read(save_movies)
+
+tbl_movies_found(movies_in_catalogue)
 ```
 

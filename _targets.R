@@ -5,7 +5,7 @@
 
 # Load packages required to define the pipeline:
 library(targets)
-# library(tarchetypes) # Load other packages as needed.
+library(tarchetypes) # Load other packages as needed.
 
 # Set target options:
 tar_option_set(
@@ -78,5 +78,9 @@ list(
   tar_target(
     name = save_movies,
     command = save_movies_metadata(movies_metadata)
+  ),
+  tar_quarto(
+    name = render_observable,
+    path = "movie_showcaser.qmd"
   )
 )
