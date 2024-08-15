@@ -1,21 +1,32 @@
 ---
-title: "Movie Showcaser"
+title: "Peliculas Digitalizadas"
 format: 
   dashboard:
     theme: zephyr
 ---
 
-## Reactable
+# Primera Tanda
 
-```{r}
+```{r primero}
 library(reactablefmtr)
 
 targets::tar_source()
 
-targets::tar_load(save_movies)
+targets::tar_load(movies_metadata_tanda1)
 
-movies_in_catalogue <- targets::tar_read(save_movies)
+movies_metadata_tanda1 <- targets::tar_read(movies_metadata_tanda1)
 
-tbl_movies_found(movies_in_catalogue)
+tbl_movies_found(movies_metadata_tanda1)
 ```
 
+
+# Segunda Tanda
+
+```{r segundo}
+
+targets::tar_load(movies_metadata_tanda2)
+
+movies_metadata_tanda2 <- targets::tar_read(movies_metadata_tanda2)
+
+tbl_movies_found(movies_metadata_tanda2)
+```

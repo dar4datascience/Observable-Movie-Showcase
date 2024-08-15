@@ -2,34 +2,52 @@
 # Function to get movie data from OMDB API
 #' @export
 search_movie_data <- function(movie_name, api){
-  # transform spaces in movie name to '+'
-  movie_name <- gsub(" ", "+", movie_name)
+  tryCatch({
+    # Transform spaces in movie name to '+'
+    movie_name <- gsub(" ", "+", movie_name)
 
-  # cli inform movie name being queried
-  cli::cli_inform(cat("Searching for movie: ", movie_name, "\n"))
+    # Inform about movie name being queried
+    cli::cli_inform(cat("Searching for movie: ", movie_name, "\n"))
 
-  movie_url <- paste0("http://www.omdbapi.com/?s=", movie_name, "&apikey=", api)
+    movie_url <- paste0("http://www.omdbapi.com/?s=", movie_name, "&apikey=", api)
 
-  #print(movie_url)
+    # Print the movie URL (for debugging purposes, uncomment if needed)
+    # print(movie_url)
 
-  response <- request(movie_url) |>
-    req_perform() |>
-    resp_body_json() |>
-    pluck("Search") |>
-    map(
-      ~ tibble(
-        title = .x$Title,
-        year = .x$Year,
-        poster = .x$Poster
-      )
-    ) |>
-    list_rbind() |>
-    #remove movies with no poster
-    filter(poster != 'N/A')
+    response <- request(movie_url) |>
+      req_perform() |>
+      resp_body_json() |>
+      pluck("Search") |>
+      map(
+        ~ tibble(
+          title = .x$Title,
+          year = .x$Year,
+          poster = .x$Poster
+        )
+      ) |>
+      list_rbind()
 
-  return(response)
+    # Check if 'poster' column exists before filtering
+    if ("poster" %in% colnames(response)) {
+      response <- response |>
+        dplyr::filter(poster != 'N/A')
+    }else{
+      response <- response |>
+        dplyr::mutate(
+          poster = NULL
+        )
+    }
 
+    return(response)
+
+  }, error = function(e) {
+    # Handle errors (e.g., print error message and return NULL or an empty tibble)
+    cli::cli_alert_danger("An error occurred: {e$message}")
+    print(dplyr::glimpse(response))
+    return(NULL)
+  })
 }
+
 
 # using search_movie_data make a movie that takes a vector of movie names and search them all and returns the result sin datafrma unified
 #' @export
@@ -40,37 +58,47 @@ search_all_movies_metadata <- function(movies_df, api){
   return(movies_data)
 }
 
-# this requieres precise name. the title from the seached movie data
+# Function to query movie data from OMDB API
 #' @export
 query_movie_data <- function(movie_name, api){
-  # transform spaces in movie name to '+'
-  movie_name <- gsub(" ", "+", movie_name)
+  tryCatch({
+    # Transform spaces in movie name to '+'
+    movie_name <- gsub(" ", "+", movie_name)
 
-  # cli inform movie name being queried
-  cli::cli_inform(cat("Searching for movie: ", movie_name, "\n"))
+    # Inform about movie name being queried
+    cli::cli_inform(cat("Searching for movie: ", movie_name, "\n"))
+
+    movie_url <- paste0("http://www.omdbapi.com/?t=", movie_name, "&apikey=", api)
+
+    response <- request(movie_url) |>
+      req_perform() |>
+      resp_body_json()
 
 
-  movie_url <- paste0("http://www.omdbapi.com/?t=", movie_name, "&apikey=", api)
+    # Create a tibble and handle missing columns
+    cleaned_response <- tibble::tibble(
+      title = response$Title,
+      year = response$Year,
+      poster = response$Poster,
+      plot = response$Plot
+    ) |>
+      # Remove movies with no poster
+      dplyr::filter(poster != 'N/A')
 
-  #print(movie_url)
+    return(cleaned_response)
 
-  response <- request(movie_url) |>
-    req_perform() |>
-    resp_body_json()
+  }, error = function(e) {
+    # Handle errors (e.g., print error message and return NULL or an empty tibble)
+    cli::cli_alert_danger("An error occurred: {e$message}")
 
-  #print(response)
-
-  cleaned_response <- tibble(
-        title = response$Title,
-        year = response$Year,
-        poster = response$Poster,
-        plot = response$Plot
-      ) |>
-    #remove movies with no poster
-    filter(poster != 'N/A')
-
-  return(cleaned_response)
-
+    # Return an empty tibble with the expected structure
+    tibble::tibble(
+      title = character(),
+      year = character(),
+      poster = character(),
+      plot = character()
+    )
+  })
 }
 
 # function that takes a list of movie data and extract desird information: title, year of release
