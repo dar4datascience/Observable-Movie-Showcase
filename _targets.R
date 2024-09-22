@@ -59,9 +59,12 @@ tar_source()
 # step 1: fs to get list of updated movies to show case
 # step 2: reactable to show case the movies with embed movies
 # step 3: deploy to github pages
-showcase_path_tanda2 <- "/run/user/1000/gvfs/smb-share:server=desktop-eknjrcs,share=bigelements/Rafa Processed/Segunda Tanda"
 
-showcase_path_tanda1 <- "/run/user/1000/gvfs/smb-share:server=desktop-eknjrcs,share=bigelements/Rafa Processed/Primera Tanda"
+showcase_path_tanda3 <- "/run/user/1000/gvfs/smb-share:server=desktop-eknjrcs,share=d//Rafa Processed/Tercera Tanda"
+
+showcase_path_tanda2 <- "/run/user/1000/gvfs/smb-share:server=desktop-eknjrcs,share=d//Rafa Processed/Segunda Tanda"
+
+showcase_path_tanda1 <- "/run/user/1000/gvfs/smb-share:server=desktop-eknjrcs,share=d//Rafa Processed/Primera Tanda"
 
 omdb_api <- Sys.getenv("OMDb_key")
 
@@ -82,6 +85,14 @@ list(
   tar_target(
     name = movies_metadata_tanda2,
     command = search_all_movies_metadata(showcase_movies_tanda2, omdb_api)
+  ),
+  tar_target(
+    name = showcase_movies_tanda3,
+    command = query_movies_2_showcase(showcase_path_tanda3)
+  ),
+  tar_target(
+    name = movies_metadata_tanda3,
+    command = search_all_movies_metadata(showcase_movies_tanda3, omdb_api)
   ),
   tar_quarto(
     name = render_observable,

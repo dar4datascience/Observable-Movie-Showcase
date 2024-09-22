@@ -30,3 +30,15 @@ movies_metadata_tanda2 <- targets::tar_read(movies_metadata_tanda2)
 
 tbl_movies_found(movies_metadata_tanda2)
 ```
+
+
+# Tercera Tanda
+
+```{r tercero}  
+
+targets::tar_load(movies_metadata_tanda3)
+
+movies_metadata_tanda3 <- targets::tar_read(movies_metadata_tanda3)
+
+tbl_movies_found(movies_metadata_tanda3)
+```
